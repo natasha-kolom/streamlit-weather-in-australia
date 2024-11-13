@@ -40,20 +40,16 @@ def preprocess_data(data, df):
     return X_new_input
  
 
-# Заголовок застосунку
-st.title('Прогноз погоди на завтра в Австралії')
-st.markdown('Ця модель передбачає чи буде завтра дощ на основі введених Вами даних, та аналізу попередніх даних за 10 років')
+# Application title
+st.title('Weather forecast for tomorrow in Australia')
+st.markdown('This model predicts whether it will rain tomorrow based on the data you enter and analyses 10 years of previous data')
 st.image('weather.png')
 
 
 df = pd.read_csv("weatherAUS.csv")
 df.dropna(subset=['RainToday', 'RainTomorrow'], inplace=True)
-# Введення характеристик чашолистків
 
-# Введення характеристик пелюсток
-
-# Заголовок секції з характеристиками рослини
-st.header("Дані про погоду")
+st.header("Weather data")
 col1, col2, col3 = st.columns(3)
 result = {}
 with col1:
@@ -80,9 +76,9 @@ with col3:
                         
 result['Date'] = pd.to_datetime('now')
 
-# Кнопка для прогнозування
-if st.button("Прогнозувати погоду на завтра"):
-    # Викликаємо функцію прогнозування
+# Button for forecasting
+if st.button("Forecast the weather for tomorrow"):
+    # Call the forecasting function
     r = preprocess_data(result, df)
     res = predict(r)
-    st.write(f"Чи буде завтра дощ: {res}")
+    st.write(f"Will it rain tomorrow: {res}")
